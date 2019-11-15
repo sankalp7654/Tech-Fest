@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TechFestDBModelStoreContainer" CdmEntityContainer="TechFestDBEntities">
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="TechFestDBModel.Class">
+        <MappingFragment StoreEntitySet="Class">
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+          <ScalarProperty Name="sem" ColumnName="sem" />
+          <ScalarProperty Name="section" ColumnName="section" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="TechFestDBModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="d_id" ColumnName="d_id" />
+          <ScalarProperty Name="d_name" ColumnName="d_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="TechFestDBModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="venue" ColumnName="venue" />
+          <ScalarProperty Name="prize" ColumnName="prize" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="TechFestDBModel.Participant">
+        <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usn" ColumnName="usn" />
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sponsors">
+      <EntityTypeMapping TypeName="TechFestDBModel.Sponsor">
+        <MappingFragment StoreEntitySet="Sponsor">
+          <ScalarProperty Name="organization" ColumnName="organization" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="TechFestDBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="usn" ColumnName="usn" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="d_id" ColumnName="d_id" />
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+          <ScalarProperty Name="pswd" ColumnName="pswd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TechFestDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="TechFestDBModel.Volunteer">
+        <MappingFragment StoreEntitySet="Volunteer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usn" ColumnName="usn" />
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Event_Has_Sponsor" TypeName="TechFestDBModel.Event_Has_Sponsor" StoreEntitySet="Event_Has_Sponsor">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="e_id" ColumnName="e_id" />
+      </EndProperty>
+      <EndProperty Name="Sponsor">
+        <ScalarProperty Name="organization" ColumnName="organization" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Winner" TypeName="TechFestDBModel.Winner" StoreEntitySet="Winner">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="e_id" ColumnName="e_id" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="usn" ColumnName="usn" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

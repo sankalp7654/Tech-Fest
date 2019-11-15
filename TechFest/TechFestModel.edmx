@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TechFestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sem" Type="int" Nullable="false" />
+          <Property Name="section" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="d_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="e_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="venue" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="prize" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Event_Has_Sponsor">
+          <Key>
+            <PropertyRef Name="organization" />
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="organization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="e_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usn" Type="nvarchar" MaxLength="50" />
+          <Property Name="e_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="organization" />
+          </Key>
+          <Property Name="organization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="usn" />
+          </Key>
+          <Property Name="usn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="d_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="c_id" Type="int" />
+          <Property Name="pswd" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Volunteer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usn" Type="nvarchar" MaxLength="50" />
+          <Property Name="e_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Winner">
+          <Key>
+            <PropertyRef Name="usn" />
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="usn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="e_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Event_Has___e_id__32E0915F">
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event_Has_Sponsor" Type="Self.Event_Has_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Event_Has_Sponsor">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Event_Has__organ__31EC6D26">
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event_Has_Sponsor" Type="Self.Event_Has_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sponsor">
+              <PropertyRef Name="organization" />
+            </Principal>
+            <Dependent Role="Event_Has_Sponsor">
+              <PropertyRef Name="organization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participan__e_id__3B75D760">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participant__usn__3A81B327">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="usn" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="usn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__c_id__1920BF5C">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__d_id__182C9B23">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="d_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__e_id__4AB81AF0">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__usn__49C3F6B7">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="usn" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="usn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Winner__e_id__24927208">
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Winner" Type="Self.Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Winner__usn__239E4DCF">
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Winner" Type="Self.Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="usn" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="usn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechFestDBModelStoreContainer">
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event_Has_Sponsor" EntityType="Self.Event_Has_Sponsor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sponsor" EntityType="Self.Sponsor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Volunteer" EntityType="Self.Volunteer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Winner" EntityType="Self.Winner" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Event_Has___e_id__32E0915F" Association="Self.FK__Event_Has___e_id__32E0915F">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Event_Has_Sponsor" EntitySet="Event_Has_Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Event_Has__organ__31EC6D26" Association="Self.FK__Event_Has__organ__31EC6D26">
+            <End Role="Sponsor" EntitySet="Sponsor" />
+            <End Role="Event_Has_Sponsor" EntitySet="Event_Has_Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participan__e_id__3B75D760" Association="Self.FK__Participan__e_id__3B75D760">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participant__usn__3A81B327" Association="Self.FK__Participant__usn__3A81B327">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__c_id__1920BF5C" Association="Self.FK__Student__c_id__1920BF5C">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__d_id__182C9B23" Association="Self.FK__Student__d_id__182C9B23">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__e_id__4AB81AF0" Association="Self.FK__Volunteer__e_id__4AB81AF0">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Volunteer" EntitySet="Volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__usn__49C3F6B7" Association="Self.FK__Volunteer__usn__49C3F6B7">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Volunteer" EntitySet="Volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Winner__e_id__24927208" Association="Self.FK__Winner__e_id__24927208">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Winner" EntitySet="Winner" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Winner__usn__239E4DCF" Association="Self.FK__Winner__usn__239E4DCF">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Winner" EntitySet="Winner" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechFestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sem" Type="Int32" Nullable="false" />
+          <Property Name="section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__c_id__1920BF5C" FromRole="Class" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="d_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__d_id__182C9B23" FromRole="Department" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="e_id" />
+          </Key>
+          <Property Name="e_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="venue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prize" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Participants" Relationship="Self.FK__Participan__e_id__3B75D760" FromRole="Event" ToRole="Participants" />
+          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__e_id__4AB81AF0" FromRole="Event" ToRole="Volunteer" />
+          <NavigationProperty Name="Sponsors" Relationship="Self.Event_Has_Sponsor" FromRole="Event" ToRole="Sponsor" />
+          <NavigationProperty Name="Students" Relationship="Self.Winner" FromRole="Event" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="e_id" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="Self.FK__Participan__e_id__3B75D760" FromRole="Participants" ToRole="Event" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Participant__usn__3A81B327" FromRole="Participants" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="organization" />
+          </Key>
+          <Property Name="organization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="Self.Event_Has_Sponsor" FromRole="Sponsor" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="usn" />
+          </Key>
+          <Property Name="usn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="d_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="c_id" Type="Int32" />
+          <Property Name="pswd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Class" Relationship="Self.FK__Student__c_id__1920BF5C" FromRole="Student" ToRole="Class" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Student__d_id__182C9B23" FromRole="Student" ToRole="Department" />
+          <NavigationProperty Name="Participants" Relationship="Self.FK__Participant__usn__3A81B327" FromRole="Student" ToRole="Participants" />
+          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__usn__49C3F6B7" FromRole="Student" ToRole="Volunteer" />
+          <NavigationProperty Name="Events" Relationship="Self.Winner" FromRole="Student" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Volunteer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="e_id" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="Self.FK__Volunteer__e_id__4AB81AF0" FromRole="Volunteer" ToRole="Event" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Volunteer__usn__49C3F6B7" FromRole="Volunteer" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Student__c_id__1920BF5C">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__d_id__182C9B23">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="d_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participan__e_id__3B75D760">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__e_id__4AB81AF0">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="e_id" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="e_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participant__usn__3A81B327">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="usn" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="usn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__usn__49C3F6B7">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="usn" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="usn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Event_Has_Sponsor">
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
+        </Association>
+        <Association Name="Winner">
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TechFestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Sponsors" EntityType="Self.Sponsor" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Volunteers" EntityType="Self.Volunteer" />
+          <AssociationSet Name="FK__Student__c_id__1920BF5C" Association="Self.FK__Student__c_id__1920BF5C">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__d_id__182C9B23" Association="Self.FK__Student__d_id__182C9B23">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participan__e_id__3B75D760" Association="Self.FK__Participan__e_id__3B75D760">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__e_id__4AB81AF0" Association="Self.FK__Volunteer__e_id__4AB81AF0">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participant__usn__3A81B327" Association="Self.FK__Participant__usn__3A81B327">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__usn__49C3F6B7" Association="Self.FK__Volunteer__usn__49C3F6B7">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
+          <AssociationSet Name="Event_Has_Sponsor" Association="Self.Event_Has_Sponsor">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Sponsor" EntitySet="Sponsors" />
+          </AssociationSet>
+          <AssociationSet Name="Winner" Association="Self.Winner">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TechFestDBModelStoreContainer" CdmEntityContainer="TechFestDBEntities">
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="TechFestDBModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="sem" ColumnName="sem" />
+                <ScalarProperty Name="section" ColumnName="section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TechFestDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="d_id" ColumnName="d_id" />
+                <ScalarProperty Name="d_name" ColumnName="d_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TechFestDBModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="e_id" ColumnName="e_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="prize" ColumnName="prize" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="TechFestDBModel.Participant">
+              <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usn" ColumnName="usn" />
+                <ScalarProperty Name="e_id" ColumnName="e_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sponsors">
+            <EntityTypeMapping TypeName="TechFestDBModel.Sponsor">
+              <MappingFragment StoreEntitySet="Sponsor">
+                <ScalarProperty Name="organization" ColumnName="organization" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="TechFestDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="usn" ColumnName="usn" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="d_id" ColumnName="d_id" />
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="pswd" ColumnName="pswd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TechFestDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Volunteers">
+            <EntityTypeMapping TypeName="TechFestDBModel.Volunteer">
+              <MappingFragment StoreEntitySet="Volunteer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usn" ColumnName="usn" />
+                <ScalarProperty Name="e_id" ColumnName="e_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Event_Has_Sponsor" TypeName="TechFestDBModel.Event_Has_Sponsor" StoreEntitySet="Event_Has_Sponsor">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="e_id" ColumnName="e_id" />
+            </EndProperty>
+            <EndProperty Name="Sponsor">
+              <ScalarProperty Name="organization" ColumnName="organization" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Winner" TypeName="TechFestDBModel.Winner" StoreEntitySet="Winner">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="e_id" ColumnName="e_id" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="usn" ColumnName="usn" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
