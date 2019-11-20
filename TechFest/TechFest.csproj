@@ -126,12 +126,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin.cs">
+      <DependentUpon>TechFestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class.cs">
       <DependentUpon>TechFestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -1471,6 +1475,8 @@
     <Content Include="TechFestModel.edmx.diagram">
       <DependentUpon>TechFestModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Admin\login.cshtml" />
+    <Content Include="Views\Admin\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,63 @@
     <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+
+    <script src="https://app.engati.com/static/js/chat_widget.js"></script>
+    <style type="text/css">
+        #engt-container .engt-comment-by-user .engt-comment-body-container {
+            background: #abe87c !important;
+            color: #000000 !important;
+        }
+
+        #engt-container .engt-auto-popup-container:before {
+            border-color: transparent #abe87c !important;
+        }
+
+        #engt-container .engt-popup-caret:after {
+            border-top-color: #abe87c !important;
+        }
+
+        .engt-popup-text {
+            border: solid 2px #abe87c !important;
+        }
+
+        #engt-container .engt-comment-by-user .engt-comment-caret:after {
+            border-left-color: #abe87c !important;
+        }
+
+        .engt-separate-card-button:hover, .engt-opt-buttons:hover, .engt-dropdown-menu a:hover {
+            background-color: #1AABED !important;
+            color: #000000 !important;
+        }
+
+        #engt-container .engt-seamless-card-button:hover {
+            color: #1AABED
+        }
+
+        .engt-separate-card-button {
+            color: #1AABED !important;
+        }
+
+            .engt-separate-card-button:hover, .engt-opt-buttons:hover label {
+                color: #fff !important;
+                cursor: pointer;
+            }
+
+        .engt-dropdown-menu a {
+            color: #1AABED !important;
+        }
+
+        .engt-opt-buttons, #engt-container .engt-list-carousel-buttons, #engt-container .engt-card-content, #engt-container .engt-comment-body-container, #engt-container .engt-comment-body-container p, .engt-buttoncarousel {
+            font-size: 13px !important;
+        }
+    </style>
+    <link href="https://app.engati.com/static/css/chat_widget.css" type="text/css" rel="stylesheet">
+    <link href="https://app.engati.com/static/css/glider.min.css" type="text/css" rel="stylesheet">
+    <script src="https://app.engati.com/static/js/glider.js"></script>
+    <script src="https://app.engati.com/static/js/glider-compat.min.js"></script>
+    <link href="https://app.engati.com/static/css/hamburger.css" type="text/css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -115,7 +172,7 @@
                     <div class="col-md-4">
                         <div class="banner_item align-items-center" style="background-image:url(/images/admin.png)">
                             <div class="banner_category">
-                                <a>@Html.ActionLink("Admin", "Index", "AdminPortal")</a>
+                                <a>@Html.ActionLink("Admin", "Login", "Admin")</a>
                             </div>
                         </div>
                     </div>
@@ -156,7 +213,7 @@
                                 <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter=".first">1st Day</li>
                                 <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".second">2nd Day</li>
                                 <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".third">3rd Day</li>
-                                <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".fourth">4th Year</li>
+                                <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".fourth">4th Day</li>
                             </ul>
                         </div>
                     </div>
@@ -179,7 +236,7 @@
 
                                     </div>
                                 </div>
-                                <div class="red_button add_to_cart_button"><a href="~/Books/coding.jpg"  target="_blank">Download</a></div>
+                                <div class="red_button add_to_cart_button"><a href="~/Books/coding.jpg" target="_blank">Download</a></div>
 
                             </div>
 
@@ -656,7 +713,7 @@
                     </div>
                 </div>
 
-                </br>
+                </br    >
                 </br>
                 <iframe width="420" height="345" src="https://www.youtube.com/embed/watch?v=t9WKOcRB63Q&list=PLJ5C_6qdAvBFzL9su5J-FX8x80BMhkPy1" frameborder="0" allowfullscreen></iframe>
                 &nbsp
@@ -760,21 +817,26 @@
                     </div>
                 </div>
             </div>
-
+            <a href="https://app.engati.com/static/standalone/bot.html?bot_key=5ed54269d72e464b">Talk to Leo</a>
 
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer_nav_container">
-                        <div class="cr">Â©2019 <i class="" aria-hidden="true"></i><a href="#"> RNSIT TechFest </a></div>
+                        <div class="cr">©2019 <i class="" aria-hidden="true"></i><a href="#"> RNSIT TechFest </a></div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
+    <script>!function (e, t, a) { var c = e.head || e.getElementsByTagName("head")[0], n = e.createElement("script"); n.async = !0, n.defer = !0, n.type = "text/javascript", n.src = t + "/static/js/chat_widget.js?config=" + JSON.stringify(a), c.appendChild(n) }(document, "https://app.engati.com", { bot_key: "5ed54269d72e464b", welcome_msg: true, branding_key: "default", server: "https://app.engati.com", e: "p" });</script>
     </div>
-
+    <div id="engt"><div id="engt-container" class="engt-container engt-reset engt-acquire"><div id="engt-launcher" class="engt-launcher engt-launcher-enabled " style="left: 40px;"><div id="engt-auto-popup-container" class="engt-auto-popup-container engt-auto-popup-container-right" style="display:none;"><div class="engt-popup-text engt-popup-text-right"><span class="pop-up-close">×</span><span class="pointer-cursor"></span></div></div><div id="engt-launcher-button" class="engt-launcher-button engt-launcher-active" style="background-image:url(https://collectcdn.com/avatars/a25.png)"></div><div id="engt-close-button" class="engt-launcher-inactive"><a class="engt-boxclose engt-themecolor" id="engt-boxclose" style="background-color: rgb(171, 232, 124); color: rgb(0, 0, 0);"></a></div></div><div id="engt-chatbox" class="engt-chatbox" style="display: none;"><div id="engt-conversation" class="engt-conversation engt-sheet engt-sheet-active" style="left:18px;animation:moveFromLeftFade .6s ease both;"><div id="engt-sheet-header" class="engt-sheet-header engt-themecolor" style="background-color: rgb(171, 232, 124); color: rgb(0, 0, 0);"><div class="engt-sheet-header-title-container"><div class="engt-icon-name-container"><div class="engt-sheet-header-title-icon  "><img src="https://collectcdn.com/avatars/a25.png"></div><div class="engt-sheet-header-title-text"><div class="engt-header-text"><b class="engt-sheet-header-title engt-sheet-header-with-presence" style="color:#000000!important" dir="auto">Olivia</b></div></div></div><div id="engt-sheet-header-description" class="engt-sheet-header-description"><b style="color:#000000!important;font-size:18px;" dir="auto"></b></div><b class="engati-intialization" id="engati-intialization" style="color:#000000!important">Initializing..</b></div><i class="engt-sheet-header-close " id="engt-sheet-header-close"></i></div><div class="engt-sheet-body"></div><div class="engt-conversation-window" id="engt-conversation-window"><div class="engt-sheet-content bottom-74"><div id="engt-sheet-content-container" class="engt-sheet-content-container"><div class="engt-conversation-parts-container"><div id="engt-message" class="engt-conversation-parts"><div id="loader_message" class="engt-conversation-part loader_message engt-conversation-part-grouped -first" style="display:none;"><div class="engt-conversation-sender-icon "><img src="https://collectcdn.com/avatars/a25.png"></div><div class=" engt-comment engt-comment-by-engt " style="padding-left:0px;"><div class="engt-comment-body-container" style="border:none;box-shadow:none;background:none;padding-bottom: 5px;"><div class="engt-comment-body engt-embed-body"><div class="typing-indicator"><span></span><span></span><span></span></div></div><div class="engt-comment-caret"></div></div></div></div></div></div></div></div><div class="engt-composer-container"><div id="engt-composer" class="engt-composer" style="transform: translate(0px, 0px);background: #ffffff;"><div class="engati-composer-content engt-composer-padding"><div id="engt-autofill-popup" class="engt-hide-element" style="left:60px !important;"></div><button id="datepicker" class="hide-datepicker engt-datepicker engt-date-picker-refresh">Select Date</button><label for="engt-input-upload" class="engt-label-upload engt-hide-element ">Browse File</label><input type="file" id="engt-input-upload" name="pic" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/zip,.doc, .docx, .pdf, .zip, image/*;capture=camera" class="engt-hide-element"><div id="engt-composer-refresh" class="" title="Start over"></div><div id="engt-menu-dropdown-container" class="engt-hide-element"></div><div id="engt-composer-menu" class="engt-hide-element" onclick="EngtChat.showHideMenu();"><button class="hamburger hamburger--squeeze" id="engt-hamburger-menu-section" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button></div><div class="engt-composer-textarea-container"><div class="engt-composer-textarea"><pre><span></span><br></pre><div class="textarea-overlay engt-hide-element"></div><input id="txMessagePassword" placeholder="Write a reply..." dir="auto" type="password" class="engt-hide-element engt-txt-password"><textarea id="txMessage" placeholder="Write a reply..." dir="auto" style=" top: 5px;"></textarea><button id="engt-send-btn"></button><div id="engt-upload-loader" class="engt-upload-loader engt-hide-element" style="background: #ffffff;border-top-color: #abe87c !important"></div></div></div><div id="engt-non-input-mode" class="engt-listening-mode engt-hide-element" style="left:60px !important; background-color: #ffffff;"><button class="engt-keyboard-btn" onclick="EngtChat.changeInputMode('input');"></button></div></div><div id="branding-powered"><p id="engt-powered" class="engt-powered center-with-refresh-btn "><a href="http://www.engati.com/#bot" target="_blank"><span class="engt-text-red"> Powered by Engati</span></a></p></div></div></div></div><div class="engt-auth-node-window engt-hide-element" id="engt-auth-node-window"><div class="engt-sheet-content-auth-node engt-bottom-20"><div class="engt-sheet-content-container"><div class="engt-p-16"><div id="engt-sign-in-content" class="engt-sign-in-content"></div></div></div></div></div></div></div></div></div>
+    <div class="pika-single is-hidden is-bound" style="position: static; left: auto; top: auto;"></div>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/styles/bootstrap4/popper.js"></script>
     <script src="/styles/bootstrap4/bootstrap.min.js"></script>

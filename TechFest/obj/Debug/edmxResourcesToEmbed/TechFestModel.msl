@@ -96,5 +96,13 @@
         <ScalarProperty Name="usn" ColumnName="usn" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="TechFestDBModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="pswd" ColumnName="pswd" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

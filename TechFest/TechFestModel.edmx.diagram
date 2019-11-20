@@ -21,6 +21,7 @@
         <AssociationConnector Association="TechFestDBModel.FK__Volunteer__usn__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="TechFestDBModel.Event_Has_Sponsor" ManuallyRouted="false" />
         <AssociationConnector Association="TechFestDBModel.Winner" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TechFestDBModel.admin" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

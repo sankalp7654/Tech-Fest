@@ -220,5 +220,13 @@
       <End Role="Event" EntitySet="Events" />
       <End Role="Student" EntitySet="Students" />
     </AssociationSet>
+    <EntitySet Name="admins" EntityType="TechFestDBModel.admin" />
   </EntityContainer>
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pswd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

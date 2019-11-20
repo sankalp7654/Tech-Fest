@@ -155,5 +155,12 @@ namespace TechFest.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Index", "Main");
+        }
     }
 }

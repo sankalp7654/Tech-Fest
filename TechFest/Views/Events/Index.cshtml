@@ -3,14 +3,22 @@
 @{
     ViewBag.Title = "Index";
     var val = User.Identity.Name;
-    
+
 }
 
-<h2>Index</h2>
+<h2>Hi @Session["Name"]</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+@using (Html.BeginForm("Index", "Main", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Logout" class="btn btn-primary" />
+}
+
 <table class="table">
     <tr>
         <th>
@@ -34,42 +42,51 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.venue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            <!--
-    @Html.ActionLink("Edit", "Edit", new { id=item.e_id }) |
-    @Html.ActionLink("Details", "Details", new { id=item.e_id }) |
-    @Html.ActionLink("Delete", "Delete", new { id=item.e_id })
-        -->
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                @Html.ActionLink("Register", "index","Events", new {id=item.e_id}, null)
-                <span >  @Html.ActionLink("Volunteer", "index", "Volunteer", new {id=item.e_id}, null)
-                </span>
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @if (Session["Name"] == null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.e_id }) 
+                <span>  @Html.ActionLink("Details", "Details", new { id = item.e_id }) </span>
+                <span>  @Html.ActionLink("Delete", "Delete", new { id = item.e_id })</span>
+                        
+
+                    }
+                    else
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                                    @Html.ActionLink("Register", "index", "Events", new { id = item.e_id }, null)
+                                    <span>
+                                        @Html.ActionLink("Volunteer", "index", "Volunteer", new { id = item.e_id }, null)
+                                    </span>
+                        }
+                    }
+
+                
+            </td>
+        </tr>
+    }
 
 </table>
-              

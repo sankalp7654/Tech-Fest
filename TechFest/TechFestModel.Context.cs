@@ -33,5 +33,6 @@ namespace TechFest
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Volunteer> Volunteers { get; set; }
+        public virtual DbSet<admin> admins { get; set; }
     }
 }
